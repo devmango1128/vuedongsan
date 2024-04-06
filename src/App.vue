@@ -1,28 +1,42 @@
 <template>
+  <div class="black-bg modal" v-if="modalOpen">
+    <div class="white-bg">
+        <h4>상세페이지</h4>
+        <p>상세페이지 내용</p>
+        <button @click="closeModal">닫기</button>
+    </div>
+  </div>
+
   <div class="menu">
     <a v-for="(menu, idx) in menus" :key="idx">
       {{ menu }}
     </a>
   </div>
-  <div v-for="(product) in products" :key="product.key">
-    <h4>{{ product.name }}</h4>
-    <p>{{ product.price }}만원</p>
-    <button @click="product.count++">허위매물신고</button><span>신고수 : {{ product.count }} 건</span>
+
+  <div v-for="(room) in rooms" :key="room.id">
+    <img class="room-img" :src="room.image" />
+    <h4 @click="modalOpen = true">{{ room.title }}</h4>
+    <p>{{ room.price }}원</p>
   </div>
 </template>
 
 <script>
+import rooms from '@/assets/rooms.js'
+
 
 export default {
   name: 'App',
   data() {
+
+    const closeModal = () => {
+      this.modalOpen = false
+    }
+
     return {
+      modalOpen : false,
       menus : ['Home', 'Shop', 'About'],
-      products : [
-        {id:'_0', name: '역삼동원룸', price: 1000, count: 0},
-        {id:'_1', name: '천호동원룸', price : 2000, count : 0},
-        {id:'_2', name: '마포구원룸', price : 250, count: 0}
-      ]
+      closeModal,
+      rooms
     } 
   },
   components: {
@@ -31,6 +45,30 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.black-bg {
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 20px;
+}
+
+.white-bg {
+  width: 100%;
+  background:#fff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -63,5 +101,10 @@ span {
   display: inline-block;
   font-size: 14px;
   margin-left : 5px;
+}
+
+.room-img {
+  width: 100%;
+  margin-top: 40px;
 }
 </style>
