@@ -1,4 +1,5 @@
 <template>
+  <!-- Modal -->
   <div class="black-bg modal" v-if="modalOpen">
     <div class="white-bg">
       <h4>{{ refRoom.title }}</h4>
@@ -10,12 +11,17 @@
     </div>
   </div>
 
+  <!-- 메뉴 -->
   <div class="menu">
     <a v-for="(menu, idx) in menus" :key="idx">
       {{ menu }}
     </a>
   </div>
+  
+  <!-- 배너 컴포넌트 -->
+  <TopBanner />
 
+  <!-- room list -->
   <div v-for="(room) in rooms" :key="room.id">
     <img class="room-img" :src="room.image" />
     <h4 @click="fnOpenModal(room)">{{ room.title }}</h4>
@@ -26,6 +32,7 @@
 <script>
 import rooms from '@/assets/rooms.js'
 import { ref } from 'vue'
+import TopBanner from '@/components/banner/TopBanner.vue'
 
 export default {
   name: 'App',
@@ -53,6 +60,7 @@ export default {
     } 
   },
   components: {
+    TopBanner
   }
 }
 </script>
@@ -93,7 +101,6 @@ div {
 .menu {
   background : #f8cb02;
   padding: 15px;
-  border-radius: 5px;
 }
 
 .menu a {
@@ -124,5 +131,11 @@ span {
 .modal-room-img {
   width: 100%;
   margin : 10px;
+}
+
+.discount {
+  background : #eee;
+  padding: 5px;
+  margin: 5px;
 }
 </style>
