@@ -1,9 +1,12 @@
 <template>
   <div class="black-bg modal" v-if="modalOpen">
     <div class="white-bg">
-        <h4>상세페이지</h4>
-        <p>상세페이지 내용</p>
-        <button @click="closeModal">닫기</button>
+      <h4>{{ refRoom.title }}</h4>
+      <img class="modal-room-img" :src="refRoom.image" />
+      <p>{{ refRoom.content }}</p>
+      <strong>{{ refRoom.price }}원</strong>
+      <br /><br />
+      <button @click="fnCloseModal">확인</button>
     </div>
   </div>
 
@@ -15,28 +18,38 @@
 
   <div v-for="(room) in rooms" :key="room.id">
     <img class="room-img" :src="room.image" />
-    <h4 @click="modalOpen = true">{{ room.title }}</h4>
+    <h4 @click="fnOpenModal(room)">{{ room.title }}</h4>
     <p>{{ room.price }}원</p>
   </div>
 </template>
 
 <script>
 import rooms from '@/assets/rooms.js'
-
+import { ref } from 'vue'
 
 export default {
   name: 'App',
   data() {
 
-    const closeModal = () => {
+    const refRoom = ref({})
+
+    //모달창 닫기
+    const fnCloseModal = () => {
       this.modalOpen = false
+    }
+    //모달창 열기
+    const fnOpenModal = (room) => {
+      this.modalOpen = true
+      refRoom.value = room
     }
 
     return {
       modalOpen : false,
       menus : ['Home', 'Shop', 'About'],
-      closeModal,
-      rooms
+      fnCloseModal,
+      fnOpenModal,
+      rooms,
+      refRoom
     } 
   },
   components: {
@@ -106,5 +119,10 @@ span {
 .room-img {
   width: 100%;
   margin-top: 40px;
+}
+
+.modal-room-img {
+  width: 100%;
+  margin : 10px;
 }
 </style>
