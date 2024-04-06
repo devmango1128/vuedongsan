@@ -13,12 +13,9 @@
   <!-- 배너 컴포넌트 -->
   <TopBanner />
 
-  <!-- room lists -->
-  <div v-for="(room) in rooms" :key="room.id">
-    <img class="room-img" :src="room.image" />
-    <h4 @click="fnOpenModal(room)">{{ room.title }}</h4>
-    <p>{{ room.price }}원</p>
-  </div>
+  <!-- Room List -->
+  <RoomList :rooms="rooms" :fnOpenModal="fnOpenModal" />
+
 </template>
 
 <script>
@@ -26,6 +23,7 @@ import rooms from '@/assets/rooms.js'
 import { ref } from 'vue'
 import TopBanner from '@/components/banner/TopBanner.vue'
 import DetailModal from '@/components/modal/DetailModal.vue'
+import RoomList from '@/components/room/RoomList.vue'
 
 export default {
   name: 'App',
@@ -54,7 +52,8 @@ export default {
   },
   components: {
     TopBanner,
-    DetailModal
+    DetailModal,
+    RoomList
   }
 }
 </script>
