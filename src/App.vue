@@ -1,27 +1,19 @@
 <template>
-  <!-- Modal -->
-  <div class="black-bg modal" v-if="modalOpen">
-    <div class="white-bg">
-      <h4>{{ refRoom.title }}</h4>
-      <img class="modal-room-img" :src="refRoom.image" />
-      <p>{{ refRoom.content }}</p>
-      <strong>{{ refRoom.price }}원</strong>
-      <br /><br />
-      <button @click="fnCloseModal">확인</button>
-    </div>
-  </div>
+
+  <!-- 상세보기 Modal Component -->
+  <DetailModal :refRoom="refRoom" :modalOpen="modalOpen" :fnCloseModal="fnCloseModal" />
 
   <!-- 메뉴 -->
-  <div class="menu">
+  <div class=" menu">
     <a v-for="(menu, idx) in menus" :key="idx">
       {{ menu }}
     </a>
   </div>
-  
+
   <!-- 배너 컴포넌트 -->
   <TopBanner />
 
-  <!-- room list -->
+  <!-- room lists -->
   <div v-for="(room) in rooms" :key="room.id">
     <img class="room-img" :src="room.image" />
     <h4 @click="fnOpenModal(room)">{{ room.title }}</h4>
@@ -33,6 +25,7 @@
 import rooms from '@/assets/rooms.js'
 import { ref } from 'vue'
 import TopBanner from '@/components/banner/TopBanner.vue'
+import DetailModal from '@/components/modal/DetailModal.vue'
 
 export default {
   name: 'App',
@@ -60,7 +53,8 @@ export default {
     } 
   },
   components: {
-    TopBanner
+    TopBanner,
+    DetailModal
   }
 }
 </script>
