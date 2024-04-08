@@ -27,27 +27,28 @@ import RoomList from '@/components/room/RoomList.vue'
 
 export default {
   name: 'App',
-  data() {
+  setup() {
 
     const refRoom = ref({})
+    const modalOpen = ref(false)
 
     //모달창 닫기
     const fnCloseModal = () => {
-      this.modalOpen = false
+      modalOpen.value = false
     }
     //모달창 열기
     const fnOpenModal = (room) => {
-      this.modalOpen = true
+      modalOpen.value = true
       refRoom.value = room
     }
 
     return {
-      modalOpen : false,
+      modalOpen,
       menus : ['Home', 'Shop', 'About'],
       fnCloseModal,
       fnOpenModal,
       rooms,
-      refRoom
+      refRoom,
     } 
   },
   components: {
