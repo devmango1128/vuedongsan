@@ -1,7 +1,9 @@
 <template>
 
   <!-- 상세보기 Modal Component -->
-  <DetailModal :refRoom="refRoom" :modalOpen="modalOpen" :fnCloseModal="fnCloseModal" />
+  <transition name="fade">
+    <DetailModal :refRoom="refRoom" :modalOpen="modalOpen" :fnCloseModal="fnCloseModal" />
+  </transition>
 
   <!-- 메뉴 -->
   <div class=" menu">
@@ -47,7 +49,7 @@ export default {
       menus : ['Home', 'Shop', 'About'],
       fnCloseModal,
       fnOpenModal,
-      rooms,
+      rooms : rooms,
       refRoom,
     } 
   },
@@ -130,6 +132,39 @@ span {
 .discount {
   background : #eee;
   padding: 5px;
+  margin: 5px;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-enter-to {
+ opacity: 1;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: all 1s;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.price-div {
+  display: inline-block;
+  width:100%;
+  text-align: right;
+}
+.price-btn {
   margin: 5px;
 }
 </style>
