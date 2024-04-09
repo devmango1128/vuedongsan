@@ -31,11 +31,13 @@ export default {
     };
 
     const fnPriceAsc = () => {
-      sortedRooms.value = [...props.rooms].sort((a, b) => a.price - b.price);
+      sortedRooms.value = [...props.rooms].sort(
+        (a, b) => a.price - b.price);
     };
 
     const fnPriceDesc = () => {
-      sortedRooms.value = [...props.rooms].sort((a, b) => b.price - a.price);
+      sortedRooms.value = [...props.rooms].sort(
+        (a, b) => b.price - a.price);
     };
 
     watch(() => props.rooms, (newValue) => {
